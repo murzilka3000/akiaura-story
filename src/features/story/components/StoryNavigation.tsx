@@ -11,7 +11,7 @@ export const StoryNavigation: React.FC = () => {
 
   const isFirst = currentStoryIndex === 0
   const isLast = currentStoryIndex === stories.length - 1
-  const currentStory = stories[currentStoryIndex]
+  // const currentStory = stories[currentStoryIndex]
 
   return (
     <div className={styles.navigation}>
@@ -32,7 +32,7 @@ export const StoryNavigation: React.FC = () => {
       )}
 
       {/* Описание и информация */}
-      <div className={`${styles.controls}`}>
+      {/* <div className={`${styles.controls}`}>
         <div className={styles.info}>
           <div className={styles.progress}>
             {currentStoryIndex + 1} / {stories.length}
@@ -40,7 +40,7 @@ export const StoryNavigation: React.FC = () => {
           {currentStory.title && <div className={styles.title}>{currentStory.title}</div>}
           {currentStory.description && <div className={styles.description}>{currentStory.description}</div>}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
