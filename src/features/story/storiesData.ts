@@ -66,8 +66,52 @@ export const storiesData: Story[] = [
     backgroundImage: "/images/story2/sky.png",
     audioTrack: "/audio/background-2.mp3",
     description: "",
-    objects: [],
     baseLayer: "/images/story2/window.png",
+    objects: [
+      {
+        id: "cat",
+        gifUrl: "/images/story2/cat.gif",
+        position: { x: 0.55, y: 0.85 },
+        size: { width: 0.4, height: 0.17 },
+        interaction: [
+          {
+            type: "replace",
+            data: {
+              replacementGif: "/images/story2/cat.gif",
+              duration: 1500,
+            },
+          },
+          {
+            type: "sound",
+            data: {
+              soundUrl: "/audio/effects/cat-cound.wav",
+            },
+          },
+        ],
+      },
+
+      {
+        id: "tulle",
+        gifUrl: "/images/story2/tulle.gif",
+        position: { x: .84, y: .5 },
+        size: { width: 0.5, height: 1 },
+        interaction: [
+          {
+            type: "replace",
+            data: {
+              replacementGif: "/images/story2/tulle.gif",
+              duration: 1500,
+            },
+          },
+          {
+            type: "sound",
+            data: {
+              soundUrl: "/audio/effects/tulle-sound.wav",
+            },
+          },
+        ],
+      },
+    ],
   },
   {
     id: 3,
