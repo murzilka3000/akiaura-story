@@ -93,7 +93,7 @@ export const storiesData: Story[] = [
       {
         id: "tulle",
         gifUrl: "/images/story2/tulle.gif",
-        position: { x: .84, y: .5 },
+        position: { x: 0.84, y: 0.5 },
         size: { width: 0.5, height: 1 },
         interaction: [
           {
@@ -116,8 +116,9 @@ export const storiesData: Story[] = [
   {
     id: 3,
     title: "",
-    backgroundImage: "/images/story3/background-3.jpg",
+    backgroundImage: "/images/story3/sky.mp4",
     audioTrack: "/audio/background-3.mp3",
+    baseLayer: "/images/story3/no-sky.png",
     objects: [],
   },
   {
