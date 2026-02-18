@@ -12,6 +12,9 @@ export const StorySlide: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 })
   const [fadeIn, setFadeIn] = useState(false)
+  
+  // Состояние переключения слоя (false = baseLayer, true = toggleBaseLayer)
+  const [isLayerToggled, setIsLayerToggled] = useState(false)
 
   const isVideo = (url: string | undefined) => {
     if (!url) return false
@@ -21,6 +24,7 @@ export const StorySlide: React.FC = () => {
   useEffect(() => {
     setImageLoaded(false)
     setFadeIn(false)
+    setIsLayerToggled(false) // Сбрасываем переключатель при смене слайда
     
     const bgIsVideo = isVideo(currentStory.backgroundImage)
     const srcToLoad = bgIsVideo ? currentStory.baseLayer : currentStory.backgroundImage
@@ -44,10 +48,17 @@ export const StorySlide: React.FC = () => {
       setTimeout(() => setFadeIn(true), 50)
     }
     img.src = srcToLoad
-  }, [currentStory.backgroundImage, currentStory.baseLayer])
+  }, [currentStory.backgroundImage, currentStory.baseLayer, currentStory.id])
 
   if (!currentStory) {
     return <div>Start</div>
+  }
+
+  // Обработчик клика для переключения картинки
+  const handleContainerClick = () => {
+    if (currentStory.toggleBaseLayer) {
+      setIsLayerToggled((prev) => !prev)
+    }
   }
 
   const containerStyle =
@@ -58,6 +69,11 @@ export const StorySlide: React.FC = () => {
       : {
           aspectRatio: "9 / 16",
         }
+
+  // Вычисляем, какую картинку показывать в нижнем слое
+  const activeBaseLayer = (isLayerToggled && currentStory.toggleBaseLayer)
+    ? currentStory.toggleBaseLayer
+    : currentStory.baseLayer
 
   const renderMainBackground = () => {
     if (isVideo(currentStory.backgroundImage)) {
@@ -93,31 +109,39 @@ export const StorySlide: React.FC = () => {
 
   return (
     <div className={styles.storySlide}>
-      <div className={styles.imageContainer} style={containerStyle}>
+      <div 
+        className={styles.imageContainer} 
+        style={containerStyle}
+        onClick={handleContainerClick}
+      >
         
+        {/* Ambient background (размытый фон) */}
         {imageLoaded && (
           <img
-            src={currentStory.baseLayer || (isVideo(currentStory.backgroundImage) ? "" : currentStory.backgroundImage)}
+            src={activeBaseLayer || (isVideo(currentStory.backgroundImage) ? "" : currentStory.backgroundImage)}
             alt=""
             className={`${styles.ambientBackground} ${fadeIn ? styles.fadeIn : styles.fadeOut}`}
             style={{ display: isVideo(currentStory.backgroundImage) && !currentStory.baseLayer ? 'none' : 'block' }}
           />
         )}
 
-        {imageLoaded && currentStory.baseLayer && (
+        {/* Base Layer (Нижний слой: переключается между baseLayer и toggleBaseLayer) */}
+        {imageLoaded && activeBaseLayer && (
             <img 
-                src={currentStory.baseLayer}
+                src={activeBaseLayer}
                 alt="background base"
                 className={`${styles.baseLayer} ${fadeIn ? styles.fadeIn : styles.fadeOut}`}
             />
         )}
 
+        {/* Main Background (Видео или Верхний слой) */}
         {imageLoaded ? (
           renderMainBackground()
         ) : (
           <h1 className={styles.backgroundError}>Loading...</h1>
         )}
 
+        {/* Interactive Objects */}
         {imageLoaded && (
           <div className={`${styles.objectsLayer} ${fadeIn ? styles.fadeIn : styles.fadeOut}`}>
             {[...currentStory.objects]

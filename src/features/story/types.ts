@@ -38,11 +38,12 @@ export interface Story {
   id: number
   title: string
   backgroundImage: string
-  
+
   audioTrack: string
   objects: InteractiveObject[]
   description?: string
   baseLayer?: string
+  toggleBaseLayer?: string
 }
 
 export interface StoryState {

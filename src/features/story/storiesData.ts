@@ -70,7 +70,7 @@ export const storiesData: Story[] = [
     objects: [
       {
         id: "cat",
-        gifUrl: "/images/story2/cat.gif",
+        gifUrl: "/images/story2/cat-1.png",
         position: { x: 0.55, y: 0.85 },
         size: { width: 0.4, height: 0.17 },
         interaction: [
@@ -118,11 +118,12 @@ export const storiesData: Story[] = [
     title: "",
     backgroundImage: "/images/story3/sky.mp4",
     audioTrack: "/audio/background-3.wav",
-    baseLayer: "/images/story3/no-sky.png",
+    baseLayer: "/images/story3/no-sky.png ",
+    toggleBaseLayer: "/images/story3/no-sky-3-tiny.png",
     objects: [
       {
         id: "cat",
-        gifUrl: "/images/story3/flowers.gif",
+        gifUrl: "/images/story3/flower-1.png",
         position: { x: 0.7, y: 0.83 },
         size: { width: 0.3, height: 0.17 },
         interaction: [
