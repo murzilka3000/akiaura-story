@@ -117,9 +117,31 @@ export const storiesData: Story[] = [
     id: 3,
     title: "",
     backgroundImage: "/images/story3/sky.mp4",
-    audioTrack: "/audio/background-3.mp3",
+    audioTrack: "/audio/background-3.wav",
     baseLayer: "/images/story3/no-sky.png",
-    objects: [],
+    objects: [
+      {
+        id: "cat",
+        gifUrl: "/images/story3/flowers.gif",
+        position: { x: 0.7, y: 0.83 },
+        size: { width: 0.3, height: 0.17 },
+        interaction: [
+          {
+            type: "replace",
+            data: {
+              replacementGif: "/images/story3/flowers.gif",
+              duration: 1500,
+            },
+          },
+          {
+            type: "sound",
+            data: {
+              soundUrl: "/audio/effects/flowers-sound.mp3",
+            },
+          },
+        ],
+      },
+    ],
   },
   {
     id: 4,
